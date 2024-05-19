@@ -9,7 +9,7 @@ export type User = {
 
 export type MenuItem = {
   _id: string;
-  user: string;
+  name: string;
   price: number;
 };
 
