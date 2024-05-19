@@ -22,21 +22,6 @@ const DetailPage = () => {
 
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
-  // [
-  //   {
-  //     _id: ITEM_1,
-  //     name: cheeze Pizza,
-  //     price: 10,
-  //     quantity: 1,
-  //   },
-  //   {
-  //     _id: ITEM_2,
-  //     name: veggie Pizza,
-  //     price: 12,
-  //     quantity: 1,
-  //   },
-  // ]
-
   const addToCart = (menuItem: MenuItemType) => {
     setCartItems((prevCartItems) => {
       // 1. Check if the item is already in the cart
