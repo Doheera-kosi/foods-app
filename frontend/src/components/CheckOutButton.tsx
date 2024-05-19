@@ -3,15 +3,17 @@ import { useLocation } from "react-router-dom";
 import { Button } from "./ui/button";
 import LoadingButton from "./LoadingButton";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
-import UserProfileForm, { UserFormData } from "@/forms/user-profile-form/UserProfileForm";
+import UserProfileForm, {
+  UserFormData,
+} from "@/forms/user-profile-form/UserProfileForm";
 import { useGetMyUser } from "@/api/MyUserApi";
 
 type Props = {
-  onCheckout: (userFormData: UserFormData)=> void;
+  onCheckout: (userFormData: UserFormData) => void;
   disabled: boolean;
-}
+};
 
-const CheckOutButton = ({onCheckout, disabled}: Props) => {
+const CheckOutButton = ({ onCheckout, disabled }: Props) => {
   const {
     isAuthenticated,
     isLoading: isAuthLoading,
@@ -20,7 +22,7 @@ const CheckOutButton = ({onCheckout, disabled}: Props) => {
 
   const { pathname } = useLocation();
 
-  const { currentUser, isLoading: isGetUserLoading} = useGetMyUser();
+  const { currentUser, isLoading: isGetUserLoading } = useGetMyUser();
 
   const onLogin = async () => {
     await loginWithRedirect({
@@ -45,13 +47,17 @@ const CheckOutButton = ({onCheckout, disabled}: Props) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button disabled={disabled} className="bg-orange-500 flex-1">Go to checkout</Button>
+        <Button disabled={disabled} className="bg-orange-500 flex-1">
+          Go to checkout
+        </Button>
       </DialogTrigger>
       <DialogContent className="max-w-[425px] md:min-w-[700px] bg-gray-50">
         <UserProfileForm
           currentUser={currentUser}
           onSave={onCheckout}
           isLoading={isGetUserLoading}
+          title="Confirm Delivery Details"
+          buttonText="Please continue to payment"
         />
       </DialogContent>
     </Dialog>
