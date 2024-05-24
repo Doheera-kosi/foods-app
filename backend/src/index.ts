@@ -19,12 +19,15 @@ cloudinary.config({
 });
 
 const app = express();
-app.use(express.json());
 app.use(cors());
 
 app.get("/health", async (req: Request, res: Response) => {
   res.send({ message: "health OK!" });
 });
+
+app.use(express.json());
+
+app.use("/api/order/checkout/webhook", express.raw({ type: "*/*" }));
 
 app.use("/api/my/user", myUserRoute);
 app.use("/api/my/restaurant", myRestaurantRoute);
@@ -33,4 +36,4 @@ app.use("/api/order", orderRoute);
 
 app.listen(7000, () => {
   console.log("server started on localhost: 7000");
-}); 
+});
