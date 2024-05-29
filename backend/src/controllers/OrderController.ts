@@ -24,7 +24,7 @@ type CheckoutSessionRequest = {
 
 const stripeWebhookHandler = async (req: Request, res: Response) => {
   let event: Stripe.Event;
-  const sig = req.headers["stripe-sginature"];
+  const sig = req.headers["stripe-signature"];
   try {
     event = STRIPE.webhooks.constructEvent(
       req.body,
@@ -97,39 +97,6 @@ const createCheckoutSession = async (req: Request, res: Response) => {
     res.status(500).json({ message: error.raw.message });
   }
 };
-
-// const createLineItems = (
-//   checkoutSessionRequest: CheckoutSessionRequest,
-//   menuItems: MenuItemType[]
-// ) => {
-//   // 1. foreach cartItem, get the menuItem object from the restaurant
-//   // (to get the price)
-//   // 2. foreach cartItem, convert it to a stripe line item
-//   // 3. return line item array
-
-//   const lineItems = checkoutSessionRequest.cartItems.map((cartItem) => {
-//     const menuItem = menuItems.find(
-//       (item) => item._id.toString() === cartItem.menuItemId.toString()
-//     );
-
-//     if (!menuItem) {
-//       throw new Error(`Menu Item Not Found: ${cartItem.menuItemId}`);
-//     }
-
-//     const line_item: Stripe.Checkout.SessionCreateParams.LineItem = {
-//       price_data: {
-//         currency: "usd",
-//         unit_amount: menuItem.price,
-//         product_data: {
-//           name: menuItem.name,
-//         },
-//       },
-//       quantity: parseInt(cartItem.quantity),
-//     };
-//   });
-
-//   return lineItems;
-// };
 
 const createLineItems = (
   checkoutSessionRequest: CheckoutSessionRequest,

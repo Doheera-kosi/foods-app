@@ -25,6 +25,8 @@ app.get("/health", async (req: Request, res: Response) => {
   res.send({ message: "health OK!" });
 });
 
+app.use("/api/order/checkout/webhook", express.raw({ type: "application/json" }));
+
 app.use(express.json());
 
 app.use("/api/order/checkout/webhook", express.raw({ type: "*/*" }));
