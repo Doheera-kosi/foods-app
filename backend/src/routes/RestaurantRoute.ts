@@ -14,7 +14,7 @@ router.get(
   RestaurantController.getRestaurant
 );
 
-// /api/restaurant/search/london
+// /api/restaurant/search/london 
 router.get(
   "/search/:city",
   param("city")
